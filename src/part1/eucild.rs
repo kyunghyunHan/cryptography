@@ -9,4 +9,4 @@ fn gcd(mut x: i32, mut y: i32) -> i32 {
 
 pub fn  main(){
     
-}
+} 
