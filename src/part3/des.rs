@@ -46,6 +46,8 @@ fn key_expansion(key: &mut [u8], exp_key: &mut [[u8; 6]; 16]) {}
 // 자리 바꿈 함수
 
 fn swap(x:u32,y: u32){}
+
+
 // 56bit -> 28bit 로 나누는 함수
 
 fn make_bit_28(c:u32,d:u32,data :&mut [u8]){}
