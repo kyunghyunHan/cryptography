@@ -1,44 +1,68 @@
 
 const BLOCK_SIZE:u32= 8;//DES 블록사이즈
 const DES_ROUND:u32= 16;//DES 라운드 수
-//DES 암호화 함수
-fn des_encryption(){}
-//DES복호화 함수
-fn des_decryption(){}
-//초기 순열함수
-fn initial_permutation(){}
-//역초기 순열 함수
-fn inverse_initial_permutation(){}
-//확장 순열함수
-fn expand_permutation(){}
-//순열함수
-fn permutation(){}
-// 순열 선택 - 1 함수
-fn permuted_choice_1(){}
-// 순열 선택 - 2 함수
-fn permuted_choice_2(){}
-// s-box 변환 함수
-fn s_box_transfer(){}
-//f함수
-fn f(){}
-// 키 확장 함수
 
-fn key_expansion(){}
+const expansion_permutation_table:[i32;48]= [
+    32, 1, 2, 3, 4, 5,
+4, 5, 6, 7, 8, 9,
+8, 9, 10, 11, 12, 13,
+12, 13, 14, 15, 16, 17,
+16, 17, 18, 19, 20, 21,
+20, 21, 22, 23, 24, 25,
+24, 25, 26, 27, 28, 29,
+28, 29, 30, 31, 32, 1];
+
+//DES 암호화 함수
+fn des_encryption(plain_text: &mut [u8], result: &mut [u8], key: &mut [u8]) {}
+//DES복호화 함수
+fn des_decryption(cipher_text: &mut [u8], result: &mut [u8], key: &mut [u8]){}
+//초기 순열함수
+fn initial_permutation(input:&mut [u8],output: &mut [u8]){}
+//역초기 순열 함수
+fn inverse_initial_permutation(input:&mut [u8],output: &mut [u8]){}
+//확장 순열함수
+fn expand_permutation(r: u32, out: &mut [u8; 6]) {
+    let mut mask = 0x80000000u32; // 1000 0000 0000 0000 0000 0000 0000 0000
+
+    for i in 0..48 {
+        if r & (mask >> (expansion_permutation_table[i] - 1)) != 0 {
+            out[i / 8] |= 0x80 >> (i % 8);
+        }
+    }
+}
+
+//순열함수
+fn permutation(input:u32){}
+// 순열 선택 - 1 함수
+fn permuted_choice_1(input:&mut [u8],output: &mut [u8]){}
+// 순열 선택 - 2 함수
+fn permuted_choice_2(c:u32,d:u32,output:&mut [u8]){}
+// s-box 변환 함수
+fn s_box_transfer(input:&mut [u8]){}
+//f함수
+fn f(r:u32,rkey:&mut[u8]){}
+// 키 확장 함수
+fn key_expansion(key: &mut [u8], exp_key: &mut [[u8; 6]; 16]) {}
 // 자리 바꿈 함수
 
-fn swap(){}
+fn swap(x:u32,y: u32){}
 // 56bit -> 28bit 로 나누는 함수
 
-fn make_bit_28(){}
+fn make_bit_28(c:u32,d:u32,data :&mut [u8]){}
+
+
 // 28bit 순환 시프트 함수
 
-fn circular_shift(){}
+fn circular_shift(n:u32,r:i32){}
 // byte를 word로 바꾸는 함수
 
-fn byte_to_word(){}
-// word를 byte로 바꾸는 함수
+fn byte_to_word(input :&mut[u8],x:u32,y:u32){}
 
-fn word_to_byte(){}
+
+// word를 byte로 바꾸는 함수
+fn word_to_byte(l:u32,r:u32,out:&mut [u8]){
+    
+}
 
 
     
@@ -65,15 +89,15 @@ pub fn main(){
     33, 1, 41, 9, 49, 17, 57, 25];
     // 확장 순열 테이블
 
-    let expansion_permutation_table:[i32;48]= [
-        32, 1, 2, 3, 4, 5,
-    4, 5, 6, 7, 8, 9,
-    8, 9, 10, 11, 12, 13,
-    12, 13, 14, 15, 16, 17,
-    16, 17, 18, 19, 20, 21,
-    20, 21, 22, 23, 24, 25,
-    24, 25, 26, 27, 28, 29,
-    28, 29, 30, 31, 32, 1];
+    // let expansion_permutation_table:[i32;48]= [
+    //     32, 1, 2, 3, 4, 5,
+    // 4, 5, 6, 7, 8, 9,
+    // 8, 9, 10, 11, 12, 13,
+    // 12, 13, 14, 15, 16, 17,
+    // 16, 17, 18, 19, 20, 21,
+    // 20, 21, 22, 23, 24, 25,
+    // 24, 25, 26, 27, 28, 29,
+    // 28, 29, 30, 31, 32, 1];
     // 순열 테이블
 
     let p_box_table:[i32;32]= [
