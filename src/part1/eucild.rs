@@ -41,7 +41,7 @@ a|b
 
 
 
-//최대 공약수를 구하는 함수
+//최대 공약수를 구하는 함수//
 fn gcd(mut x: i32, mut y: i32) -> i32 {
     //두 수를 나눈 후 나눈 나머지를 구하여 0 이 될 떄까지 반복한다.
     while y != 0 {//y가 0이 될떄  x가 Greastest Common Divisor GCD이다.
