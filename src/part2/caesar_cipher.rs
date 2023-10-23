@@ -1,5 +1,5 @@
 use std::io;
-
+/*고전암호 */
 pub fn main() {
     let mut input = String::new();
     let mut key_str = String::new();
